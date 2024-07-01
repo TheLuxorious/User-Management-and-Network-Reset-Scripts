@@ -1,5 +1,3 @@
-#Windows Local User Management Scripts
-
 **Windows Local User Management Scripts**
 
 Welcome to the Windows Local User Management Scripts repository, where you'll find a collection of PowerShell scripts designed to streamline the management of local user accounts and system settings on Windows machines. These scripts are particularly useful in environments requiring efficient device deployment and user account management.
