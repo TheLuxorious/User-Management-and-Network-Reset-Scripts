@@ -6,8 +6,8 @@
 # Once done, press any key to exit the script.
 
 # Change the username to whatever you want the username to be. (Password is optional, see the commented section for adding a password)
-$UserName = 'USER'
-#$Password = 'password'
+$UserName = 'your_username_here'
+#$Password = 'your_password_here'
 
 # --Set Privacy Consent Status in OOBE--
 # This command sets the privacy consent status to '1', indicating that privacy consent has been given.
