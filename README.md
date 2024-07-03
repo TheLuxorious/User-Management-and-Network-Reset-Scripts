@@ -35,3 +35,6 @@ Welcome to the Windows Local User Management Scripts repository, where you'll fi
 - Ensure to review and modify script variables as per your specific environment and security requirements.
 
 These scripts aim to simplify administrative tasks related to user management and system configuration on Windows machines, enhancing operational efficiency and maintaining consistent configuration across deployments.
+
+<sub> Made by TheLuxorious
+© 2024 TheLuxorious. All rights reserved. </sub>
