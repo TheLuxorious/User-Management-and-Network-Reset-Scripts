@@ -21,18 +21,6 @@ If (-Not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 # Set the username for the new user.
 $UserName = 'your_username_here'
 
-# Function to read the password securely
-function Read-Password {
-    param(
-        [string]$Prompt = "Enter Password: "
-    )
-    $secureString = Read-Host -AsSecureString -Prompt $Prompt
-    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
-        [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureString)
-    )
-    return $password
-}
-
 # --- Part 1: Remove User and Profile ---
 
 # --Check if User Account Exists--
