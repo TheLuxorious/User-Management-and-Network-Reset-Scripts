@@ -94,16 +94,6 @@ if ($UserAccount -eq $null) {
     }
 }
 
-# --Set or Change User Password--
-if (-not $Test) {
-    $password = Read-Password -Prompt "Enter password for user '$UserName'"
-    $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-    Set-LocalUser -Name $UserName -Password $securePassword 2>&1 | Out-Null
-    Write-Host "Password for user '$UserName' has been set/changed successfully."
-} else {
-    Write-Host "[Test Mode] Would prompt for and set password for user '$UserName'."
-}
-
 # --- Part 3: Remove Bluetooth Devices ---
 
 # --Import Bluetooth Removal Function--
@@ -185,10 +175,13 @@ if (-not $Test) {
 # Restart the system if not in Test mode
 if (-not $Test) {
     Write-Host "Restarting the system in 10 seconds..."
-    shutdown -f -r -t 10 -d p:5:20
+    shutdown -f -r -t 15 -d p:5:20
 } else {
     Write-Host "[Test Mode] Would restart the system."
 }
+
+# Wait for a few seconds before exiting
+Start-Sleep -Seconds 5
 
 # Made by TheLuxorious
 # © 2024 TheLuxorious. All rights reserved.
