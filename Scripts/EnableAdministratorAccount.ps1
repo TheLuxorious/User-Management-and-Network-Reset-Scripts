@@ -1,37 +1,48 @@
-# Thanks for using my script.
-# ---!!! Run this script as a shortcut or directly in PowerShell; running it in ISE doesn't work !!!---
-# This script checks if the default Administrator account is enabled. If not, it prompts you to enable it.
-# Change the password to your liking (replace 'your_password_here').
-# Once done, press any key to exit the script.
+param (
+    [switch]$Test
+)
 
+# Check for Administrator Privileges
+If (-Not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "Please run this script as an Administrator." -ForegroundColor Red
+    Exit
+}
+
+# ---!!! Run this script as a shortcut or directly in PowerShell; running it in ISE doesn't work !!!---
+# This script enables the default Administrator account if it is disabled.
 # Change the password to your liking (replace 'your_password_here').
+# Includes a -Test switch to simulate actions without making changes.
+
+# Made by TheLuxorious
+# © 2024 TheLuxorious. All rights reserved.
+
+# ******** SCRIPT STARTS FROM HERE ********
+
+# Set the password for the Administrator account.
 $Password = 'your_password_here'
 
 # "Retrieve Administrator Account Status"
-# Retrieves the status of the 'Administrator' local user account.
 $adminAccount = Get-LocalUser -Name 'Administrator' -ErrorAction SilentlyContinue
 
-# "Check If Administrator Account is Enabled"
-# Checks if the 'Administrator' account is enabled and prompts the user if it is disabled.
+# "Enable Administrator Account if Disabled"
 if ($adminAccount) {
     if ($adminAccount.Enabled) {
         Write-Host "Administrator account is enabled."
     } else {
-        # Prompt the user to enable the Administrator account.
-        Write-Host "Administrator account is disabled."
-        $response = Read-Host -Prompt "Do you want to enable it? (Enter 'Yes', 'Y', or 'y' to enable, or any other key to continue without enabling.)"
-
-        if ($response.ToLower() -eq "yes" -or $response.ToLower() -eq "y") {
+        if (-not $Test) {
             # Enable Administrator account
-            net user administrator $Password /active:yes
+            net user administrator $Password /active:yes 2>&1 | Out-Null
             Write-Host "Administrator account has been enabled."
         } else {
-            Write-Host "Administrator account remains disabled."
+            Write-Host "[Test Mode] Would enable the Administrator account."
         }
     }
 } else {
     Write-Host "Administrator account does not exist on this system."
 }
 
-# Pause the script to view the output before it exits.
-$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+# Wait for a few seconds before exiting
+Start-Sleep -Seconds 5
+
+# Made by TheLuxorious
+# © 2024 TheLuxorious. All rights reserved.
