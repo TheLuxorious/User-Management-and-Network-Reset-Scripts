@@ -1,40 +1,60 @@
-**Windows Local User Management Scripts**
+# User Management and Network Reset Scripts
 
-Welcome to the Windows Local User Management Scripts repository, where you'll find a collection of PowerShell scripts designed to streamline the management of local user accounts and system settings on Windows machines. These scripts are particularly useful in environments requiring efficient device deployment and user account management.
+This repository contains a collection of PowerShell scripts designed for managing user accounts and resetting network settings on Windows machines. These scripts can be used individually or in combination to automate various tasks related to user account management and network configuration.
 
-### Scripts Overview:
+## Script Overview
 
-- **CreateUserWithPwd.ps1**
-  - **Description:** Automates the creation of a local user account with a password configuration and addition to the Administrators group.
-  - **Affected Settings:** Creates a new local user account, sets privacy settings, and skips various Out-of-Box Experience (OOBE) prompts during setup.
-  - **Instructions:** 
-    - Change `$UserName` variable to desired username.
+- **`CreateUserWithPwd.ps1`**
+  - **Description:** Creates a new local user account with a specified password.
+  - **Functionality:**
+    - Sets OOBE and security settings.
+    - Checks if the user exists and creates the user if it doesn't.
+    - Prompts for a secure password input for the new user.
+  - **User Instructions:** Run the script directly in PowerShell (not in ISE), set the desired username, and execute.
 
-- **CreateUserOptionalPwd.ps1**
-  - **Description:** Automates the creation of a local user account with an optional password configuration and addition to the Administrators group.
-  - **Affected Settings:** Creates a new local user account, sets privacy settings, and skips various Out-of-Box Experience (OOBE) prompts during setup.
-  - **Instructions:** 
-    - Change `$UserName` variable to desired username.
-    - Uncomment `$Password` variable and `Set-LocalUser` command to set a password.
+- **`CreateUserWithOptionalPwd.ps1`**
+  - **Description:** Creates a new local user account with an optional password.
+  - **Functionality:**
+    - Sets OOBE and security settings.
+    - Checks if the user exists and creates the user if it doesn't.
+    - Allows setting a password if desired; otherwise, creates the user without a password.
+  - **User Instructions:** Run the script directly in PowerShell (not in ISE), set the desired username and optionally set a password in the script, and execute.
 
-- **RemoveUser.ps1**
-  - **Description:** Deletes a specified local user account and removes the associated user profile folder.
-  - **Affected Settings:** Changes folder ownership to Administrators, deletes the user account and associated files.
-  - **Instructions:** 
-    - Change `$UserName` variable to the username to be removed.
+- **`EnableAdministratorAccount.ps1`**
+  - **Description:** Enables the default Administrator account if it is disabled.
+  - **Functionality:**
+    - Checks the status of the Administrator account.
+    - Enables the Administrator account and sets a specified password if it is disabled.
+  - **User Instructions:** Run the script directly in PowerShell (not in ISE), set the desired password for the Administrator account in the script, and execute.
 
-- **EnableAdministratorAccount.ps1**
-  - **Description:** Checks and enables the default Administrator account if it is disabled.
-  - **Affected Settings:** Enables the built-in Administrator account, requiring a specified password.
-  - **Instructions:** 
-    - Replace `'your_password_here'` with the desired password in the `$Password` variable.
+- **`RemoveUserAndProfile.ps1`**
+  - **Description:** Deletes a specified local user and removes their profile folder.
+  - **Functionality:**
+    - Checks if the user account exists.
+    - Deletes the user account and changes ownership of the user's folder to Administrators.
+    - Deletes the user's profile folder.
+  - **User Instructions:** Run the script directly in PowerShell (not in ISE), set the desired username to be deleted in the script, and execute.
 
-### Usage Notes:
-- Run these scripts in PowerShell directly or as shortcuts for optimal functionality.
-- Avoid running them in PowerShell Integrated Scripting Environment (ISE) due to potential compatibility issues.
-- Ensure to review and modify script variables as per your specific environment and security requirements.
+- **`ResetBluetoothAndWifi.ps1`**
+  - **Description:** Removes all paired Bluetooth devices and resets network configuration including Wi-Fi profiles.
+  - **Functionality:**
+    - Removes all paired Bluetooth devices.
+    - Removes all saved Wi-Fi profiles.
+    - Resets network configuration including DNS, IP, firewall, and Winsock settings.
+  - **User Instructions:** Run the script directly in PowerShell (not in ISE), and execute.
 
-These scripts aim to simplify administrative tasks related to user management and system configuration on Windows machines, enhancing operational efficiency and maintaining consistent configuration across deployments.
+- **`CombinedUserSetupAndReset.ps1`**
+  - **Description:** Combines multiple functionalities for setting up and resetting a user environment.
+  - **Functionality:**
+    - Deletes a specified user and their profile.
+    - Creates a new user with a specified password.
+    - Removes paired Bluetooth devices and resets network configuration.
+  - **User Instructions:** Run the script directly in PowerShell (not in ISE), set the desired usernames and passwords in the script, and execute.
+    
+## Instructions for Use
+- Ensure you run these scripts with administrator privileges.
+- Customize the scripts by setting the desired usernames and passwords where applicable.
+- Execute the scripts directly in PowerShell (not in ISE).
+- Use the `-Test` switch where available to simulate actions without making changes.
 
-<sub> Made by TheLuxorious </sub> <br> </br>
-<sub> © 2024 TheLuxorious. All rights reserved. </sub>
+By following these instructions, you can effectively manage user accounts and reset network settings on your Windows machines.
